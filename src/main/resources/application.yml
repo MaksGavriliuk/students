@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    username: root
+    password: maksi
+    url: jdbc:postgresql://localhost:5432/students
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 8120
+
+logging:
+  level:
+    org.flywaydb: DEBUG
