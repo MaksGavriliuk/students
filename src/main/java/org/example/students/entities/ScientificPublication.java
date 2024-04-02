@@ -8,8 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapKey;
-import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -35,14 +33,14 @@ public class ScientificPublication {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "journal", nullable = false)
+    @Column(name = "journal")
     private String journal;
 
-    @Column(name = "publication_title", nullable = false)
+    @Column(name = "publication_title")
     private String publicationTitle;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "publication_date", nullable = false)
+    @Column(name = "publication_date")
     private Date publicationDate;
 
     @ManyToOne
