@@ -21,6 +21,6 @@ public interface StudentActivityService {
 
     StudentActivityDTO updateStudentActivity(long id, StudentActivityDTO specialtyDTO);
 
-    Page<StudentActivityDTO> findStudentActivitiesByStudentId(long studentId);
+    Page<StudentActivityDTO> findStudentActivitiesByStudentId(long studentId, Pageable pageable);
     
 }

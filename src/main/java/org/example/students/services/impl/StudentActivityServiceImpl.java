@@ -62,8 +62,8 @@ public class StudentActivityServiceImpl implements StudentActivityService {
     }
 
     @Override
-    public Page<StudentActivityDTO> findStudentActivitiesByStudentId(long studentId) {
-        return studentActivityRepository.findStudentActivitiesByStudentId(studentId)
+    public Page<StudentActivityDTO> findStudentActivitiesByStudentId(long studentId, Pageable pageable) {
+        return studentActivityRepository.findStudentActivitiesByStudentId(studentId, pageable)
                 .map(studentActivityMapper::toStudentActivityDTO);
     }
 
