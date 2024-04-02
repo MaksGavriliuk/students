@@ -7,8 +7,8 @@ import jakarta.validation.constraints.NotNull;
 
 public record StudentSocialNetworkDTO(
         @JsonProperty(access = JsonProperty.Access.READ_ONLY) @NotNull Long id,
-        @NotNull long social_network_id,
-        @NotNull long student_id,
+        @NotNull long socialNetworkId,
+        @NotNull long studentId,
         @NotBlank String link
 ) {
 }
