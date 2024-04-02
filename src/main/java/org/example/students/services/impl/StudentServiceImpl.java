@@ -1,26 +1,31 @@
 package org.example.students.services.impl;
 
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.example.students.dtos.StudentDTO;
+import org.example.students.entities.Photo;
 import org.example.students.entities.Student;
+import org.example.students.mappers.PhotoMapper;
 import org.example.students.mappers.StudentMapper;
+import org.example.students.repositories.PhotoRepository;
 import org.example.students.repositories.StudentRepository;
 import org.example.students.services.StudentService;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.example.students.exceptions.NotFoundException;
-
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
+    private final StudentMapper studentMapper;
+    private final PhotoRepository photoRepository;
+    private final PhotoMapper photoMapper;
+
 
     @Override
     public boolean existsByStudentId(long studentId) {
@@ -28,20 +33,20 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Page<Student> findStudents(int pageNumber, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        return studentRepository.findAll(pageable);
+    public Page<StudentDTO> findStudents(Pageable pageable) {
+        return studentRepository.findAll(pageable)
+                .map(studentMapper::toStudentDTO);
     }
 
     @Override
     public Student findStudentById(long id) {
-        return studentRepository.findById(id).orElse(null);
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Не удалось найти студента с id = " + id));
     }
 
     @Override
-    public Student findStudentByIdOrElseThrow(long id) {
-        return studentRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Не удалось найти студента с id = " + id));
+    public StudentDTO getStudentById(long id) {
+        return studentMapper.toStudentDTO(findStudentById(id));
     }
 
     @Override
@@ -50,26 +55,30 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student saveStudent(StudentDTO studentDTO) {
-        Student student = StudentMapper.INSTANCE.StudentDTOToStudent(studentDTO);
-        return studentRepository.save(student);
+    public StudentDTO saveStudent(StudentDTO studentDTO, MultipartFile photo) {
+        Photo mappedPhoto = photoMapper.toPhoto(photo);
+        Photo savedPhoto = photoRepository.save(mappedPhoto);
+        Student student = studentMapper.toStudent(studentDTO)
+                .setPhoto(savedPhoto);
+        Student savedStudent = studentRepository.save(student);
+        return studentMapper.toStudentDTO(savedStudent);
     }
 
     @Override
-    public List<Student> saveStudents(List<StudentDTO> studentsDTO) {
-        List<Student> students = studentsDTO
-                .stream()
-                .map(StudentMapper.INSTANCE::StudentDTOToStudent)
-                .toList();
-        return studentRepository.saveAll(students);
+    public StudentDTO updateStudent(StudentDTO studentDTO, MultipartFile photo) {
+
+        return null;
+    }
+
+
+    @Override
+    public Photo getPhotoByStudentId(long studentId) {
+        return findStudentById(studentId).getPhoto();
     }
 
     @Override
-    public Student updateStudent(long id, StudentDTO studentDTO) {
-        Student student = StudentMapper.INSTANCE
-                .StudentDTOToStudent(studentDTO)
-                .setId(findStudentByIdOrElseThrow(id).getId());
-        return studentRepository.save(student);
+    public void updatePhotoByCandidateId(Long id, MultipartFile photo) {
+
     }
 
 }

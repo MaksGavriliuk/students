@@ -2,28 +2,31 @@ package org.example.students.services;
 
 
 import org.example.students.dtos.StudentDTO;
+import org.example.students.entities.Photo;
 import org.example.students.entities.Student;
 import org.springframework.data.domain.Page;
-
-import java.util.List;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 
 public interface StudentService {
 
     boolean existsByStudentId(long studentId);
 
-    Page<Student> findStudents(int pageNumber, int pageSize);
+    Page<StudentDTO> findStudents(Pageable pageable);
 
     Student findStudentById(long id);
 
-    Student findStudentByIdOrElseThrow(long id);
+    StudentDTO getStudentById(long id);
 
     void deleteStudentById(long id);
 
-    Student saveStudent(StudentDTO studentDTO);
+    StudentDTO saveStudent(StudentDTO studentDTO, MultipartFile photo);
 
-    List<Student> saveStudents(List<StudentDTO> studentsDTO);
+    StudentDTO updateStudent(StudentDTO studentDTO, MultipartFile photo);
 
-    Student updateStudent(long id, StudentDTO studentDTO);
+    Photo getPhotoByStudentId(long studentId);
+
+    void updatePhotoByCandidateId(Long id, MultipartFile photo);
 
 }

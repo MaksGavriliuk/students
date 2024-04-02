@@ -21,7 +21,7 @@ public record StudentDTO(
         @NotBlank String groupNumber,
         @NotBlank String hometown,
         @NotBlank String address,
-        @NotBlank String phone,
+        @NotBlank String phoneNumber,
         @NotBlank List<StudentSocialNetworkDTO> socialNetworks
 ) {
 }
