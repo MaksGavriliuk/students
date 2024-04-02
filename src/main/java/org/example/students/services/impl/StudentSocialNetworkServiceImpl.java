@@ -71,8 +71,8 @@ public class StudentSocialNetworkServiceImpl implements StudentSocialNetworkServ
 
 
     @Override
-    public Page<StudentSocialNetworkDTO> findStudentSocialNetworksByStudentId(long studentId) {
-        return studentSocialNetworkRepository.findStudentSocialNetworksByStudentId(studentId);
+    public Page<StudentSocialNetworkDTO> findStudentSocialNetworksByStudentId(long studentId, Pageable pageable) {
+        return studentSocialNetworkRepository.findStudentSocialNetworksByStudentId(studentId, pageable);
     }
 
 }

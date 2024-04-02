@@ -20,6 +20,6 @@ public interface StudentSocialNetworkService {
 
     StudentSocialNetworkDTO updateStudentSocialNetwork(long id, StudentSocialNetworkDTO specialtyDTO);
 
-    Page<StudentSocialNetworkDTO> findStudentSocialNetworksByStudentId(long studentId);
+    Page<StudentSocialNetworkDTO> findStudentSocialNetworksByStudentId(long studentId, Pageable pageable);
     
 }
