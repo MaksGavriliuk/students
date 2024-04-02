@@ -20,6 +20,6 @@ public interface ScientificPublicationService {
 
     ScientificPublicationDTO updateScientificPublication(long id, ScientificPublicationDTO specialtyDTO);
 
-    Page<ScientificPublicationDTO> findScientificPublicationsByStudentId(long studentId);
+    Page<ScientificPublicationDTO> findScientificPublicationsByStudentId(long studentId, Pageable pageable);
     
 }

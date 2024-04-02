@@ -62,8 +62,8 @@ public class ScientificPublicationServiceImpl implements ScientificPublicationSe
     }
 
     @Override
-    public Page<ScientificPublicationDTO> findScientificPublicationsByStudentId(long studentId) {
-        return scientificPublicationRepository.findScientificPublicationsByStudentId(studentId)
+    public Page<ScientificPublicationDTO> findScientificPublicationsByStudentId(long studentId, Pageable pageable) {
+        return scientificPublicationRepository.findScientificPublicationsByStudentId(studentId, pageable)
                 .map(scientificPublicationMapper::toScientificPublicationDTO);
     }
 
