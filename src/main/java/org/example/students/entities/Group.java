@@ -37,7 +37,7 @@ public class Group {
     private String groupNumber;
 
     @ManyToOne
-    @MapsId("specialization_id")
+    @JoinColumn(name = "specialization_id")
     private Specialty specialization;
 
     @OneToMany(mappedBy = "group")

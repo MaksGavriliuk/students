@@ -42,7 +42,7 @@ public class StudentActivity {
     private Date activityDate;
 
     @ManyToOne
-    @MapsId("student_id")
+    @JoinColumn(name = "student_id")
     private Student student;
 
 }

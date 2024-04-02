@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapKey;
 import jakarta.persistence.MapsId;
@@ -45,7 +46,7 @@ public class ScientificPublication {
     private Date publicationDate;
 
     @ManyToOne
-    @MapsId("student_id")
+    @JoinColumn(name = "student_id")
     private Student student;
 
 }
