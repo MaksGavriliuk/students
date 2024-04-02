@@ -4,12 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.example.students.dtos.GroupDTO;
 import org.example.students.dtos.StudentDTO;
 import org.example.students.entities.Group;
-import org.example.students.entities.Group;
 import org.example.students.exceptions.NotFoundException;
 import org.example.students.mappers.GroupMapper;
 import org.example.students.repositories.GroupRepository;
 import org.example.students.services.GroupService;
-import org.example.students.services.StudentService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,7 +19,6 @@ public class GroupServiceImpl implements GroupService {
 
     private final GroupRepository groupRepository;
     private final GroupMapper groupMapper;
-    private final StudentService studentService;
 
 
     @Override
@@ -62,7 +59,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Page<StudentDTO> getStudentsByGroupNumber(String groupNumber) {
-        return groupRepository.findStudentsByGroupNumber(groupNumber);
+    public Page<StudentDTO> getStudentsByGroupNumber(String groupNumber, Pageable pageable) {
+        return groupRepository.findStudentsByGroupNumber(groupNumber, pageable);
     }
 }
