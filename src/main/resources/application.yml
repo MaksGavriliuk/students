@@ -21,7 +21,7 @@ eureka:
 server:
   port: 8120
   servlet:
-    context-path: /scholarships/api/v1
+    context-path: /students/api/v1
 
 logging:
   level:

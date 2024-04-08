@@ -3,7 +3,32 @@ services:
     image: 'postgres:latest'
     environment:
       - 'POSTGRES_DB=students'
-      - 'POSTGRES_PASSWORD=maksi'
+      - 'POSTGRES_PASSWORD=root'
       - 'POSTGRES_USER=root'
     ports:
       - "5433:5432"
+    networks:
+      - mynetwork
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: students
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/students
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_FLYWAY_PASSWORD=root
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
+    depends_on:
+      - postgres
+    ports:
+      - '8120:8120'
+    external_links:
+      - eureka-server:eureka-server
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    external: true
