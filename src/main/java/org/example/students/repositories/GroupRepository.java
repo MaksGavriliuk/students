@@ -10,5 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Long> {
+    Group findByGroupNumber(String groupNumber);
+
     Page<StudentDTO> findStudentsByGroupNumber(String groupNumber, Pageable pageable);
 }

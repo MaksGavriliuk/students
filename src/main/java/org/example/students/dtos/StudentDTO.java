@@ -6,9 +6,9 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-import java.util.List;
 
 
 public record StudentDTO(
@@ -17,11 +17,10 @@ public record StudentDTO(
         @NotBlank String name,
         @NotBlank String patronymic,
         @NotBlank String gender,
-        @NotBlank @Temporal(TemporalType.DATE) Date dateOfBirth,
-        @NotBlank String groupNumber,
+        @NotBlank @Temporal(TemporalType.DATE) @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateOfBirth,
+        @NotBlank Long groupId,
         @NotBlank String hometown,
         @NotBlank String address,
-        @NotBlank String phoneNumber,
-        @NotBlank List<StudentSocialNetworkDTO> socialNetworks
+        @NotBlank String phoneNumber
 ) {
 }

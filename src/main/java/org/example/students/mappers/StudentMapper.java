@@ -11,13 +11,11 @@ import java.util.List;
 @Mapper
 public interface StudentMapper {
 
-    @Mapping(target = "groupNumber", source = "student.group.groupNumber")
-    @Mapping(target = "socialNetworks", source = "student.socialNetworks")
+    @Mapping(target = "groupId", source = "student.group.id")
     StudentDTO toStudentDTO(Student student);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "group", ignore = true)
-    @Mapping(target = "socialNetworks", ignore = true)
+    @Mapping(target = "group.id", source = "groupId")
     Student toStudent(StudentDTO studentDTO);
 
     List<StudentDTO> toDTOList(List<Student> students);

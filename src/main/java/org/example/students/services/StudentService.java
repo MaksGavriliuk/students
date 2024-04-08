@@ -2,11 +2,14 @@ package org.example.students.services;
 
 
 import org.example.students.dtos.StudentDTO;
+import org.example.students.dtos.StudentSocialNetworkDTO;
 import org.example.students.entities.Photo;
 import org.example.students.entities.Student;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 
 public interface StudentService {
@@ -27,6 +30,8 @@ public interface StudentService {
 
     Photo getPhotoByStudentId(long studentId);
 
-    void updatePhotoByCandidateId(Long id, MultipartFile photo);
+    void updatePhotoByStudentId(Long id, MultipartFile photo);
+
+    List<StudentSocialNetworkDTO> getStudentSocialNetworksByStudentId(long studentId);
 
 }

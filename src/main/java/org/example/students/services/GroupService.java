@@ -21,6 +21,8 @@ public interface GroupService {
 
     GroupDTO updateGroup(long id, GroupDTO specialtyDTO);
 
+    GroupDTO findByGroupNumber(String groupNumber);
+
     Page<StudentDTO> getStudentsByGroupNumber(String groupNumber, Pageable pageable);
     
 }
