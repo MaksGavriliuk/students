@@ -23,7 +23,7 @@ public interface StudentService {
 
     StudentDTO saveStudent(StudentDTO studentDTO, MultipartFile photo);
 
-    StudentDTO updateStudent(StudentDTO studentDTO, MultipartFile photo);
+    StudentDTO updateStudent(long id, StudentDTO studentDTO, MultipartFile photo);
 
     Photo getPhotoByStudentId(long studentId);
 

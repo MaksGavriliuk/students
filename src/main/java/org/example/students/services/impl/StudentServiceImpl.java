@@ -65,11 +65,15 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentDTO updateStudent(StudentDTO studentDTO, MultipartFile photo) {
-
-        return null;
+    public StudentDTO updateStudent(long id, StudentDTO studentDTO, MultipartFile photo) {
+        Photo mappedPhoto = photoMapper.toPhoto(photo);
+        Photo savedPhoto = photoRepository.save(mappedPhoto);
+        Student student = studentMapper.toStudent(studentDTO)
+                .setPhoto(savedPhoto)
+                .setId(id);
+        Student savedStudent = studentRepository.save(student);
+        return studentMapper.toStudentDTO(savedStudent);
     }
-
 
     @Override
     public Photo getPhotoByStudentId(long studentId) {
